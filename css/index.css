@@ -1,0 +1,80 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .navbar{
+    background-color: black;
+  }
+
+  .Logo{
+    margin-left: 43%;
+    position: inherit;
+    width: 12%;
+    padding: 10px;
+  }
+
+  form{
+    width: 24%;
+    background-color: black;
+    padding: 50px;
+    border-radius: 20px;
+    margin-top: 3%;
+    margin-left: 38%; 
+  }
+  
+  .btn-primary{
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    background-color: white;
+    color: #000000;
+    padding: 5px;
+  }
+    
+  .btn-primary:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+  }
+
+  .btn-primary:focus{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border-color: white;
+    border: 1px solid ;
+  }
+
+  .form-control{
+    border-bottom-color: white;
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .form-control:focus{
+    box-shadow: -8px 5px rgb(192, 160, 20);
+  }
+
+  h4{
+    font-size: 2rem !important;
+    font-weight: 700;
+    color: white;
+
+  }
+  .form-label{
+    font-family: 800 !important;
+    color: white;
+  }
+
+  @media only screen and (max-width: 600px){
+    form{
+      width: 100% !important;
+      margin-left: 0px;
+    } 
+    
+    .Logo{
+      position: inherit;
+      width: 35%;
+      margin-left: 32%;
+    }
+  }

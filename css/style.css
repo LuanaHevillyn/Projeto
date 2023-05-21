@@ -1,0 +1,103 @@
+.navbar{
+  background-color: black;
+}
+
+.Logo{
+  margin-left: 2%;
+  position: inherit;
+  width: 12%;
+  padding: 10px;
+}
+
+.text{
+  margin-right: 20%;
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+.btn-lg1{
+  position: absolute;
+  width: 25%;
+  height: 22%;
+  left: 5%;
+  margin-top: 8%;
+  background-color: black;
+  font-size: 22px;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+.btn-lg2{
+  position: absolute;
+  width: 25%;
+  height: 22%;
+  left: 38%;
+  margin-top: 8%;
+  background-color: black;
+  font-size: 22px;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+.btn-lg3{
+  position: absolute;
+  width: 25%;
+  height: 22%;
+  right: 5%;
+  margin-top: 8%;
+  background-color: black;
+  font-size: 22px;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 600px){
+ 
+.Logo{
+  margin-left: 35%;
+  position: inherit;
+  width: 30%;
+  padding: 10px;
+}
+
+.text{
+  margin-left: 5%;
+  margin-right: 0%;
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+.btn-lg1{
+  position: absolute;
+  width: 90%;
+  height: 16%;
+  margin-top: 20%;
+  background-color: black;
+  font-size: 16px;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+.btn-lg2{
+  width: 90%;
+  height: 16%;
+  margin-top: 50%;
+  margin-left: -33%;
+  background-color: black;
+  font-size: 16px;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+.btn-lg3{
+  position: absolute;
+  width: 90%;
+  height: 16%;
+  margin-top: 80%;
+  background-color: black;
+  font-size: 16px;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+}
