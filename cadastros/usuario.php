@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Painel Editora</title>
-	<meta charset="utf-8">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
-	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/LoginLivro.css">
-</head>
-<body>
-	
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
 	<title>Painel Editora</title>
 	<meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -20,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/CadastrosCDATA.css" media="only screen">
+	<link rel="stylesheet" href="../css/CadastroCData.css" media="only screen">
 </head>
 <body> 
 
@@ -30,7 +18,7 @@
 
         <ul class="nav nav-underline">
             <li class="nav-item">
-                <a class="nav-link"  href="../cadastros/editora.php">Editora</a>
+                <a class="nav-link" href="../cadastros/editora.php">Editora</a>
             </li>
 
             <li class="nav-item">
@@ -73,44 +61,70 @@
     </div>
 </nav>
 
-<div class="box">
+<div class="container-fluid">
 
-    <form action="../processa/usuario_p.php" method="post" accept-charset="utf-8"  autocomplete="off">
+    <form action="../processa/usuario_p.php" method="post" accept-charset="utf-8" autocomplete="off" class="needs-validation" novalidate>
     						
 
-                            <label for="nome">Nome:</label>
+                         <img src="../imgs/cadastroimg.png" class="cadastroimg" >
 
-                            <input type="text" class="inputN" name="nome" required>
+                            <br><label for="nome">Nome:</label>
+                            <input type="text" class="form-control" name="nome" required>
+                            <div class="invalid-feedback">
+								Digite um nome!
+							</div>
 
     		
                             <label for="email">Email:</label>
-
-    						<input type="text" class="inputE" name="email" required>
+    						<input type="email" class="form-control" name="email" required>
+                            <div class="invalid-feedback">
+								Digite um e-mail!
+							</div>
 
                             <label for="celular">Celular:</label>
-    						<input type="text"  class="inputC" name="celular" id="celular" maxlength="15" required>
+    						<input type="text" class="form-control" name="celular" id="celular" maxlength="15" required>
+                            <div class="invalid-feedback">
+								Digite um número de telefone válido!
+							</div>
                             
-                        
                             <label for="endereco">Endereço:</label>
-    						<input type="text" class="inputE" name="endereco" required>
+    						<input type="text" class="form-control" name="endereco" required>
+                            <div class="invalid-feedback">
+								Digite seu endereço!
+							</div>
 
-    
                             <label for="cpf">CPF:</label>
-    						<input type="text" class="inputCPF" name="cpf">
-
+    						<input type="text" class="form-control" name="cpf">
+                            
     						<br>
 	
-    						<input type="submit" >
+    						<input type="submit" class="btn btn-light">
 							
                         </form>
 				</div>
-</body>
 
 <script>
-	function mascara(o,f){
-    v_obj=o
-    v_fun=f
-    setTimeout("execmascara()",1)
+(() => {
+'use strict'
+
+const forms = document.querySelectorAll('.needs-validation')
+
+Array.from(forms).forEach(form => {
+	form.addEventListener('submit', event => {
+	if (!form.checkValidity()) {
+		event.preventDefault()
+		event.stopPropagation()
+	}
+
+	form.classList.add('was-validated')
+	}, false)
+})
+})()
+
+function mascara(o,f){
+v_obj=o
+v_fun=f
+setTimeout("execmascara()",1)
 }
 function execmascara(){
     v_obj.value=v_fun(v_obj.value)
@@ -129,5 +143,6 @@ window.onload = function(){
 		mascara( this, mtel );
 	}
 }
-</script>
+</script>                
+</body>
 </html>

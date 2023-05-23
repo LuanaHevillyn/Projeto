@@ -5,15 +5,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>Painel Usuário</title>
-	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
+	<title>Painel Editora</title>
 	<meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
+	<link rel="stylesheet" href="../css/CadastroCData.css" media="only screen">
 </head>
-<body>
-
-<header style="background-color: black; padding: 40px">
-	<center><h3 style="color: white;">DEVOLVA O LIVRO</h3> </center>
-</header>
+<body> 
 
 	<?php 
 
@@ -31,123 +32,109 @@
 		}
 	?>
 
-<br><br><br>
-<center>
-		<form action="../edita/devolucao_e.php?id=<?php echo $id;?>" method="post" accept-charset="utf-8" >
-				<label for="nomeLivro">Nome do livro:</label>
+<div class="container-fluid">
+		<form action="../edita/devolucao_e.php?id=<?php echo $id;?>" method="post" accept-charset="utf-8" autocomplete="off">
+			<img src="../imgs/cadastroimg.png" class="cadastroimg" >
+		
+			<br><label for="nomeLivro">Nome do livro:</label>
 
-					<select name="nomeLivro" required>
-					<option disable>Selecione Livro</option>
+					<select name="nomeLivro" class="form-select" aria-label="Default select example" required>
+								<option value="<?php echo $nomeLivro;?>"><?php echo $nomeLivro;?></option>
 
-					<?php
+								<?php
 
-					include_once '../conexoes/conexao.php';
+								include_once '../conexoes/conexao.php';
 
-					$sql_s = "SELECT * FROM livro";
+								$sql_s = "SELECT * FROM livro";
 
-					$result = $conn -> query($sql_s);
+								$result = $conn -> query($sql_s);
 
-					while ($row_nome = $result->fetch_assoc()){ ?>
+								while ($row_nome = $result->fetch_assoc()){ ?>
 
-					<option value="<?php echo $row_nome['id']; ?>">
-					
-					<?php echo $row_nome['nome'] ?>
+								<option value="<?php echo $row_nome['id']; ?>">
+								
+								<?php echo $row_nome['id'] ?>
 
-					</option>
+								</option>
 
-					<?php
-					}
-					
-					?>
-					
-				</select>
-				
+								<?php
+								}
+								
+								?>
+							</select>
+
 				<label for="nomeUsu">Seu nome:</label>
 
-				<select class="inputN" name="nomeUsu" required>
-					<option disable>Selecione Nome</option>
+				<select name="nomeUsu" class="form-select" aria-label="Default select example" required>
+								<option value="<?php echo $nomeUsu;?>"><?php echo $nomeUsu;?></option>
+								<?php
+								include_once '../conexoes/conexao.php';
 
-					<?php
+								$sql_s = "SELECT * FROM usuarioaluga";
 
-					include_once '../conexoes/conexao.php';
+								$result = $conn -> query($sql_s);
 
-					$sql_s = "SELECT * FROM usuarioaluga";
+								while ($row_nome = $result->fetch_assoc()){ ?>
 
-					$result = $conn -> query($sql_s);
+								<option value="<?php echo $row_nome['id']; ?>">
 
-					while ($row_nome = $result->fetch_assoc()){ ?>
+								<?php echo $row_nome['id'] ?>
 
-					<option value="<?php echo $row_nome['id']; ?>">
-					
-					<?php echo $row_nome['nome'] ?>
+								</option>
 
-					</option>
+								<?php
 
-					<?php
-					}
-					
-					?>
-				</select>
+								}
+								
+								?>
+							  </select>							
+							  
 
-
-
-				
 
 				<label for="dAluguel">Data do Aluguel:</label>
-				<input type="date" class="inputN"  name="dAluguel" required>
+				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" id="calendario">
 				
 						
-
-    			<label for="dDevolucao">dDevolucao:</label>
-    			<input type="date" name="dDevolucao" id="dDevolucao" value="<?php echo $dDevolucao;?>">
-
-				<script>
-					const dDevolucaoinput = document.getElementById("dDevolucao");
-					//Valor input Data
-
-					const prazo = 30;
-					//Valor do prazo 
-
-					dDevolucaoinput.addEventListener('change', function(){
-					//Registra uma espera de evento com um alvo
-
-					const dDevolucao = new Date(this.value);
-					//passa o valor da variável como argumento
-
-					const dataLimite = new Date();
-					//DATA VAZIA
-					//inicializa um objeto
-
-					const dataAtrasada = new Date();
-
-					dataLimite.setDate(dataLimite.getDate() + prazo);
-					//pega a data vazia e soma com o prazo
-
-					dataAtrasada.setDate(dataAtrasada.getDate());
-
-					if (dDevolucao > dataLimite) {
-					//se a data de devolucao for maior que 30
-
-					alert("o prazo limite é de 30 dias. selecione outro.");
-
-					this.value = "";
-					//Limpa o campo
-					}
-
-					if (dDevolucao < dataAtrasada) {
-						alert("DEVOLUÇÃO ATRASADA");				
-					}
-
-					});
-				</script>
-
-				//ESTAO TROCADOS !!!!!!!!!!!!!!!!!!!
+    			<label for="dDevolucao">Data de Devolução:</label>
+				<input type="text" name="dDevolucao" class="form-control" value="<?php echo $dDevolucao;?>" id="data">
 
     			<br>
-    			<input type="submit" name="btn" value="Devolver">
-				<a href="../mostrar/aluguel_m.php">Cancelar</a>
+    			<input type="submit" name="btn" value="Alterar" class="btn btn-light">
+				<button type="button" class="btn btn-light" onclick="window.location.href = '../mostrar/aluguel_m.php'">Cancelar</button>
+				
 
     	</form>
-</center>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script>
+            
+$(function() {
+	$( "#calendario" ).datepicker({dateFormat: 'dd-mm-yy',
+	changeMonth: true,
+	changeYear: true,
+	dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+	dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+	dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+	monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+	monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				
+});
+});
+
+$(function() {
+	$( "#data" ).datepicker({dateFormat: 'dd-mm-yy',
+	changeMonth: true,
+	changeYear: true,
+	dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+	dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+	dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+	monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+	monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				
+});
+});
+</script>
 </body>
 </html>

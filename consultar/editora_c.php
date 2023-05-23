@@ -34,22 +34,20 @@ include_once '../conexoes/conexao.php';
 		
 		echo "<tr>";
 			echo "<th scope='row'>$id <td>$nome<td>$email<td>$telefone <td>$sitee";
-			echo "<th scope='row'><a href='../form_edita/editora_fe.php?id=$id' class='btn'>Editar</a>";
-			echo "<th scope='row'><a href='../deletar/deletarEditora.php?id=$id' class='btn' onclick='return funcao1();'>Excluir</button>
+			echo "<th scope='row'><a href='../form_edita/editora_fe.php?id=$id' class='btn'><img style='width: 100%;' src='../imgs/editar.png'></a>";
+			echo "<th scope='row'><button class='btn' onclick='return funcao1();'><img style='width: 50%;' src='../imgs/delete.png'></button>
 			
 			<script>
-			function funcao1()
-			{
-			var x;
-			var r=confirm('A Editora será deletada.');
-			if (r==true){
+			function funcao1(){
 
-				window.location.href = '../deletar/deletarEditora.php?id=$id';
-			
+				if (confirm('A editora será excluída!') == true) {
+					
+					window.location.href = '../deletar/deletarEditora.php?id=$id';
 
-			}else{
-				window.location.href = '../mostrar/editora_m.php';
-			}
+				} else {
+
+					window.location.href = '../mostrar/editora_m.php';
+				}
 			}
 			</script>";
 		echo "<tr>";

@@ -22,7 +22,6 @@
 	$dAluguel = isset($_POST['dAluguel'])?$_POST['dAluguel']:"";
 	$dDevolucao   = isset($_POST['dDevolucao'])?$_POST['dDevolucao']:"";
 
-	$hoje = date('d/m/Y');
 
 	if ($livros_estoque > 0) {
 		$modificar = $conn->query("UPDATE aluguel SET nomeLivro = '$nomeLivro', nomeUsu = '$nomeUsu', dAluguel= '$dAluguel', dDevolucao = '$dDevolucao'  WHERE id='$id'");
@@ -30,7 +29,7 @@
 		$alterar = $conn->query("UPDATE livro SET disponiveis = estoque + 1, alugados = alugados - 1 WHERE id='$nomeLivro'");
 
 		$mudar = $conn->query("UPDATE usuarioaluga SET alugueis = alugueis - 1 WHERE id = '$nomeUsu' ");
-
+		header("location: ../mostrar/aluguel_m.php");
 	}
 
 	if ($livros_alugueis == 1) {
@@ -45,16 +44,9 @@
 
 	}
 	//AJEIAR ISSO AQUI
+	
 
-	if ($dDevolucao < $hoje) {
-
-		$alterar = $conn->query("UPDATE aluguel SET estado = 'atrasado'  WHERE id='$id'");
-
-	}elseif ($dDevolucao > $hoje){
-		$alterar = $conn->query("UPDATE aluguel SET estado = 'noPrazo'  WHERE id='$id'");
-	}
-
-	header("location: ../mostrar/aluguel_m.php");
+	
 
 
 ?>

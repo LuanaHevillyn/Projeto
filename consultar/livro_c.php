@@ -39,22 +39,20 @@ include_once '../conexoes/conexao.php';
 
 		echo "<tr>";
 			echo "<th scope='row'>$id <td>$nome <td>$autor <td>$editora <td>$dLancamento <td>$estoque <td>$estado";
-			echo "<th scope='row'><a href='../form_edita/livro_fe.php?id=$id' class='btn'>Editar</a>";
-			echo "<th scope='row'><a href='../deletar/deletarLivro.php?id=$id' class='btn' onclick='return funcao1();'>Excluir</button>
+			echo "<th scope='row'><a href='../form_edita/livro_fe.php?id=$id' class='btn'><img style='width: 100%;' src='../imgs/editar.png'></a>";
+			echo "<th scope='row'><button class='btn' onclick='return funcao1();'><img style='width: 50%;' src='../imgs/delete.png'></button>
 			
 			<script>
-			function funcao1()
-			{
-			var x;
-			var r=confirm('O livro será deletado!');
-			if (r==true){
+			function funcao1(){
 
-				window.location.href = '../deletar/deletarLivro.php?id=$id';
-			
-			}else{
-				
-				window.location.href = '../mostrar/livro_m.php';
-			}
+				if (confirm('O livro será deletado!') == true) {
+					
+					window.location.href = '../deletar/deletarLivro.php?id=$id';
+
+				} else {
+
+					window.location.href =  '../mostrar/livro_m.php';
+				}
 			}
 			</script>";
 		echo "<tr>";

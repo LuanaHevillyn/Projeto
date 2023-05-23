@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/Registros.css" media="only screen">
+	<link rel="stylesheet" href="../css/Registro.css" media="only screen">
 </head>
 <body> 
 
@@ -60,19 +60,17 @@
         </div>
     </div>
 </nav>
+
+
 <div class="container-xl">
-
-
-<div class="container-fluid">
 
     <form class="d-flex" action="" role="search" autocomplete="off">
       <input class="form-control me-2" type="search" name="confere" placeholder="Buscar..." aria-label="Search">
       <button class="btn btn-sm btn-outline-secondary" type="submit">Buscar</button>
     </form>
-  </div>
-      
 
-        <table class="table">
+
+        <table class="table table-bordered">
             <thead>
                 <tr>
                 <th scope="col">ID</th>
@@ -96,4 +94,5 @@
         </table>	
 
 	</div>
+</div>
 </body>

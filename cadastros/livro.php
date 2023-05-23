@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Painel Editora</title>
-	<meta charset="utf-8">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
-	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/LoginLivro.css">
-</head>
-<body>
-	
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
 	<title>Painel Editora</title>
 	<meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -20,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/CadastrosCDATA.css" media="only screen">
+	<link rel="stylesheet" href="../css/CadastroCData.css" media="only screen">
 </head>
 <body> 
 
@@ -74,25 +62,30 @@
 </nav>
 
 
+<div class="container-fluid">
 
-<div class="box" style="height: 105%;">
+    <form action="../processa/livro_p.php" method="post" accept-charset="utf-8" autocomplete="off" class="needs-validation" novalidate>
 
-    <form action="../processa/livro_p.php" method="post" accept-charset="utf-8"  autocomplete="off">
+                        <img src="../imgs/cadastroimg.png" class="cadastroimg" >
 
-                    <center><h3>Livro</h3></center>
-					<hr style="background-color: white; height: 3px;">
     						
-                            <label for="nome">Nome:</label>
+                            <br><label for="nome">Nome:</label>
                             <input type="text"  class="form-control" name="nome" required>
+                            <div class="invalid-feedback">
+								Digite o nome do livro!
+							</div>
 
 
                             <label for="autor">Autor:</label>
     						<input type="text"  class="form-control" name="autor" required>
+                            <div class="invalid-feedback">
+								Digite o autor do livro!
+							</div>
 
 		
                             <label for="editora">Editora:</label>
     						<select name="nomeEditora" class="form-select" required>
-								<option  disabled selected>Selecione Editora</option>
+								<option disabled selected value="">Selecione Editora</option>
 
 								<?php
 
@@ -114,19 +107,23 @@
 								}	
 								?>
 							</select>
+                            <div class="invalid-feedback">
+								Selecione a editora!
+							</div>
 
-
-    					
                             <label for="dLancamento">Data de Lançamento:</label>
 
-    						<input type="text" class="form-control" name="dAluguel"  id="calendario">
+    						<input type="text" class="form-control" name="dLancamento" id="calendario" required>
+                            <div class="invalid-feedback">
+								Escolha a data de lançamento!
+							</div>
 							<div id="datepicker-container" class="datepicker-container">
-
-                            
         
                             <label for="estoque">Estoque:</label>
     						<input type="text"  class="form-control" name="estoque" required>
-
+                            <div class="invalid-feedback">
+								Digite a quantidade do estoque!
+							</div>
 
     						<br>
 
@@ -136,24 +133,40 @@
 				</div>
 
 
-</body>
-
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-		<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-		<script>
-			$(function() {
-				$( "#calendario" ).datepicker({dateFormat: 'dd-mm-yy',
-				changeMonth: true,
-				changeYear: true,
-				dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-				dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-				monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-				monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-							
-			
-			
-			});
-			});
-		</script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script>
+(() => {
+'use strict'
+
+const forms = document.querySelectorAll('.needs-validation')
+
+Array.from(forms).forEach(form => {
+	form.addEventListener('submit', event => {
+	if (!form.checkValidity()) {
+		event.preventDefault()
+		event.stopPropagation()
+	}
+
+	form.classList.add('was-validated')
+	}, false)
+})
+})()
+            
+$(function() {
+	$( "#calendario" ).datepicker({dateFormat: 'dd-mm-yy',
+	changeMonth: true,
+	changeYear: true,
+	dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+	dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+	dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+	monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+	monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				
+
+
+});
+});
+</script>
+</body>
 </html>

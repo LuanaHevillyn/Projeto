@@ -36,7 +36,7 @@ include_once '../conexoes/conexao.php';
 		echo "<tr>";
 			echo "<th scope='row'>$id <td>$nomeLivro <td>$nomeUsu <td>$dAluguel <td>$dDevolucao<td>$estado";
 			echo "<th scope='row'><a href='../form_edita/devolucao_fe.php?id=$id' class='btn'>Devolver</a>";
-			echo "<th scope='row'><a href='../deletar/deletarLivro.php?id=$id' class='btn'>Excluir</a>";
+
 		echo "<tr>";
 	}
 }
