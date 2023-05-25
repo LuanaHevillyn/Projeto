@@ -1,5 +1,5 @@
 <?php 
-	include_once 'conexao.php';
+	include_once '../conexoes/conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,8 +17,94 @@
     <a href="./locadora.html" style="margin-left: 34%;">Página Principal</a>
 
 </header>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+
+    google.charts.load("current", {packages:['corechart']});
+
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+
+        ["Element", "Density", { role: "style" } ],
+
+        <?php
+        $sql = "SELECT * FROM usuarioaluga";
+        $busca = mysqli_query($conn, $sql);
+
+        while ($dados = mysqli_fetch_array($busca)) {
+          $nome = $dados['nome'];
+          $alugueis	= $dados['alugueis'];
+        
+        ?>
+
+        ["<?php echo $nome ?>", <?php echo $alugueis ?> ,"color: black"],
+
+        <?php } ?>
+      
+      ]);
+
+      var view = new google.visualization.DataView(data);
+
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+
+      var options = {
+        title: "Density of Precious Metals, in g/cm^3",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <?php
-include_once 'conexao.php';
+include_once '../conexoes/conexao.php';
 
 ///QUANTIDADE LIVROS ALUGADOS
 $query_alugados = "SELECT SUM(alugados) AS alugados FROM livro";
@@ -83,5 +169,4 @@ while ($dados = $busca->fetch_assoc()) {
 	}
 echo "<hr>";
 ?>
-
 </body>
