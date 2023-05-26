@@ -18,22 +18,47 @@
 
 <div class="container-fluid">
 
-    <form action="./processa/index_p.php" class="mx-auto" method="post" accept-charset="utf-8" autocomplete="off">
+    <form action="./processa/index_p.php" method="post" accept-charset="utf-8" autocomplete="off" class="needs-validation" novalidate>
 		  <h4 class="text-center">Login</h4>
 			<div class="mb-3 mt-5">
 			  <label for="nome" class="form-label">Nome: </label>
-			  <input type="text" class="form-control" name="nome" >
+			  <input type="text" class="form-control" name="nome" required>
+			  <div class="invalid-feedback">
+				Insira um nome!
+			</div>
 			</div>
 
 			<div class="mb-3">
 			  <label for="senha" class="form-label">Senha: </label>
-			  <input type="password" class="form-control" name="senha">
+			  <input type="password" class="form-control" name="senha" required>
+			  <div class="invalid-feedback">
+				Insira uma senha!
+			</div>
 			</div>
 		  <br>
 		<button type="submit" class="btn-primary">Login</button>
 	</form> 
 
 </div>
+
+<script>
+(() => {
+	'use strict'
+	
+	const forms = document.querySelectorAll('.needs-validation')
+	
+	Array.from(forms).forEach(form => {
+		form.addEventListener('submit', event => {
+		if (!form.checkValidity()) {
+			event.preventDefault()
+			event.stopPropagation()
+		}
+	
+		form.classList.add('was-validated')
+		}, false)
+	})
+	})()
+</script>
 
 </body>
 </html>

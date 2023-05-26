@@ -22,10 +22,11 @@ include_once '../conexoes/conexao.php';
 	
 
 		$dAluguel = isset($_POST['dAluguel']) == true ?$_POST['dAluguel']:"";
+		$prevDevolucao = isset($_POST['prevDevolucao']) == true ?$_POST['prevDevolucao']:"";
 
 		if( @$livro_qtd > 0 ){
 
-			$sql =  "INSERT INTO aluguel (nomeLivro, nomeUsu, dAluguel) VALUES ('$nomeLivro', '$nomeUsu', '$dAluguel')";
+			$sql =  "INSERT INTO aluguel (nomeLivro, nomeUsu, dAluguel, prevDevolucao) VALUES ('$nomeLivro', '$nomeUsu', '$dAluguel', '$prevDevolucao')";
 
 			$update_query = "update livro set disponiveis = estoque, disponiveis = estoque - 1, alugados = alugados + 1, estado = 'alugado' where id = '$nomeLivro' ";
 			mysqli_query($conn, $update_query);

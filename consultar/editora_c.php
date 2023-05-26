@@ -35,7 +35,7 @@ include_once '../conexoes/conexao.php';
 		echo "<tr>";
 			echo "<th scope='row'>$id <td>$nome<td>$email<td>$telefone <td>$sitee";
 			echo "<th scope='row'><a href='../form_edita/editora_fe.php?id=$id' class='btn'><img style='width: 100%;' src='../imgs/editar.png'></a>";
-			echo "<th scope='row'><button class='btn' onclick='return funcao1();'><img style='width: 50%;' src='../imgs/delete.png'></button>
+			echo "<th scope='row'><button class='btn' onclick='return funcao1();'><img class='delete' src='../imgs/delete.png'></button>
 			
 			<script>
 			function funcao1(){

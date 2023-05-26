@@ -87,7 +87,7 @@
 <script>
             
 $(function() {
-	$( "#calendario" ).datepicker({dateFormat: 'dd-mm-yy',
+	$( "#calendario" ).datepicker({dateFormat: 'dd/mm/yy',
 	changeMonth: true,
 	changeYear: true,
 	dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],

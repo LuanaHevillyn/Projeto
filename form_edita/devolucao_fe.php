@@ -28,6 +28,7 @@
 			$nomeLivro   = $dados['nomeLivro'];
 			$nomeUsu	= $dados['nomeUsu'];
 			$dAluguel = $dados['dAluguel'];
+			$prevDevolucao = $dados['prevDevolucao'];
 			@$dDevolucao	   = $dados['dDevolucao	'];
 		}
 	?>
@@ -38,7 +39,7 @@
 		
 			<br><label for="nomeLivro">Nome do livro:</label>
 
-					<select name="nomeLivro" class="form-select" aria-label="Default select example" required>
+					<select name="nomeLivro" class="form-select" aria-label="Default select example" disabled>
 								<option value="<?php echo $nomeLivro;?>"><?php echo $nomeLivro;?></option>
 
 								<?php
@@ -65,7 +66,7 @@
 
 				<label for="nomeUsu">Seu nome:</label>
 
-				<select name="nomeUsu" class="form-select" aria-label="Default select example" required>
+				<select name="nomeUsu" class="form-select" aria-label="Default select example" disabled>
 								<option value="<?php echo $nomeUsu;?>"><?php echo $nomeUsu;?></option>
 								<?php
 								include_once '../conexoes/conexao.php';
@@ -92,11 +93,14 @@
 
 
 				<label for="dAluguel">Data do Aluguel:</label>
-				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" id="calendario">
+				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" disabled>
 				
-						
+				<label for="prevDevolucao">Previsão de Devolução:</label>
+				<input type="text" name="prevDevolucao" class="form-control" value="<?php echo $prevDevolucao;?>" disabled>	
+				
+
     			<label for="dDevolucao">Data de Devolução:</label>
-				<input type="text" name="dDevolucao" class="form-control" value="<?php echo $dDevolucao;?>" id="data">
+				<input type="text" name="dDevolucao" class="form-control" id="calendario">
 
     			<br>
     			<input type="submit" name="btn" value="Alterar" class="btn btn-light">
@@ -111,7 +115,7 @@
 <script>
             
 $(function() {
-	$( "#calendario" ).datepicker({dateFormat: 'dd-mm-yy',
+	$( "#calendario" ).datepicker({dateFormat: 'dd/mm/yy',
 	changeMonth: true,
 	changeYear: true,
 	dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -123,18 +127,6 @@ $(function() {
 });
 });
 
-$(function() {
-	$( "#data" ).datepicker({dateFormat: 'dd-mm-yy',
-	changeMonth: true,
-	changeYear: true,
-	dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-	dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-	dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-	monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-	monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-				
-});
-});
 </script>
 </body>
 </html>

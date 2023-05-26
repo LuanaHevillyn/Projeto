@@ -124,19 +124,24 @@
 
 							<label for="dAluguel">Data do Aluguel:</label>
 								
-							<input type="text" class="form-control" name="dAluguel" id="calendario" required>
+							<input type="text" class="form-control" name="dAluguel" id="startDate" required>
 							<div class="invalid-feedback">
 								Coloque a data de aluguel!
 							</div>
 							<div id="datepicker-container" class="datepicker-container">
 
-							
+							<label for="prevDevolucao">Data da Devolução:</label>
+							<input type="text" class="form-control" name="prevDevolucao"  id="finishDate"  required>
+							<div class="invalid-feedback">
+								Coloque a data de devolução!
+							</div>
+
 
 							<button type="submit" class="btn btn-light">Cadastrar</button>
 					</div>
                 </form>
-</div>
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+			</div>
+		<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 		<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 		<script>
 			(() => {
@@ -157,23 +162,48 @@
 				})()
 				
 			$(function() {
+
 				$( "#calendario" ).datepicker({dateFormat: 'dd-mm-yy',
 				changeMonth: true,
 				changeYear: true,
-				dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-				dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-				monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-				monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-							
-			
-			
+							});
 			});
-			});
-		</script>
 
 
-</body>
+$(function() {
+
+// Limite de dias após a data inicial, configure como desejar.
+var maxdays = 30;
+// Diferenca minima entre a data de inicio e saida exemplo minimo de 3 dias colocar 3.
+// 0 =  pode entrar e sair no mesmo dia.
+var diference = 0
+
+$('#startDate').datepicker({
+  dateFormat: 'dd/mm/yy',
+  changeMonth: true,
+  dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+  dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+  dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+  monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+  monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+
+  onSelect: function(date, obj) {
+	//Year, Month -1(comeca em 0 vai ate 11), Day.
+	var selected = date.split("/");
+	var limitDate = new Date(selected[2],(selected[1]-1),selected[0]);
+	var difDate = new Date(selected[2],(selected[1]-1),selected[0]);
+	limitDate.setDate(limitDate.getDate() + maxdays);
+	difDate.setDate(difDate.getDate() + diference);
+	$("#finishDate").datepicker("option", "maxDate", limitDate);
+	$("#finishDate").datepicker("option", "minDate", difDate);
+  }
+});
+
+$('#finishDate').datepicker({ dateFormat: 'dd/mm/yy' });
+
+});
+
+</script>
 
 </html>
 								

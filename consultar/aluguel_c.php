@@ -30,11 +30,12 @@ include_once '../conexoes/conexao.php';
 		$nomeLivro	= $dados['nomeLivro'];
 		$nomeUsu 	= $dados['nomeUsu'];
 		$dAluguel	= $dados['dAluguel'];
+		$prevDevolucao	= $dados['prevDevolucao'];
 		$dDevolucao	= $dados['dDevolucao'];
 		$estado	= $dados['estado'];
 
 		echo "<tr>";
-			echo "<th scope='row'>$id <td>$nomeLivro <td>$nomeUsu <td>$dAluguel <td>$dDevolucao<td>$estado";
+			echo "<th scope='row'>$id <td>$nomeLivro <td>$nomeUsu <td>$dAluguel<td>$prevDevolucao<td>$dDevolucao<td>$estado";
 			echo "<th scope='row'><a href='../form_edita/devolucao_fe.php?id=$id' class='btn'>Devolver</a>";
 
 		echo "<tr>";

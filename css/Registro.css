@@ -89,6 +89,9 @@ tbody{
     border: 1px solid black;
 }
 
+.delete{
+    width: 20%;
+}
 
 
 @media only screen and (max-width: 600px){
@@ -106,7 +109,6 @@ tbody{
 
     .nav-link{
         color: white;
-        font-size: 50px;
         text-decoration: none;
         font-family: 'Montserrat';
         font-weight: 700;
@@ -114,7 +116,6 @@ tbody{
     
     .nav-link:hover{
         color: white;
-        font-size: 50px;
         text-decoration: none;
         font-family: 'Montserrat';
     }
@@ -124,40 +125,4 @@ tbody{
         margin-top: 6%;
     }
 
-    .navbar-toggler{
-       width: 10%;
-    }
-
-    .offcanvas-title{
-        font-size: 50px;
-    }
-    
-    .offcanvas-header{
-        background-color: rgb(15, 15, 15);
-    }
-
-    .d-flex{
-        position: absolute;
-        top: 27%;
-        width: 38%;
-        height: 5%;
-        left: 60%;
-    }
-
-    table{
-        margin-top: 22%;
-        width: 100%;
-        border: 1px solid black;
-        font-weight: bold;
-    }
-
-    thead{
-        font-size: 30px;
-        border: 1px solid black;
-    }
-
-    tbody{
-        font-size: 30px;
-        border: 1px solid black;
-    }
   }

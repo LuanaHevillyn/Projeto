@@ -75,8 +75,9 @@
                 <th scope="col">ID</th>
                 <th scope="col">ID do Livro</th>
                 <th scope="col">ID do Usuário</th>
-                <th scope="col">Data do Aluguel</th>
-                <th scope="col">Data da Devolução</th>
+                <th scope="col">Aluguel</th>
+                <th scope="col">Previsão da Devolução</th>
+                <th scope="col">Devolução</th>
                 <th scope="col">Estado</th>
                 <th scope="col"></th>
                 </tr>

@@ -60,7 +60,7 @@
 
 
       var options = {
-        title: "Density of Precious Metals, in g/cm^3",
+        title: "O aluguel de cada usuário: ",
         width: 600,
         height: 400,
         bar: {groupWidth: "95%"},
@@ -70,11 +70,47 @@
       chart.draw(view, options);
   }
   </script>
-<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+<div id="columnchart_values" style="width: 900px; height: 300px;"></div><br><br><br>
 
 
 
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			
+          ['Task', 'Hours per Day'],
+		  
+		<?php
+        $sql = "SELECT * FROM livro";
+        $busca = mysqli_query($conn, $sql);
+
+        while ($dados = mysqli_fetch_array($busca)) {
+          $nome = $dados['nome'];
+          $alugados	= $dados['alugados'];
+        
+        ?>
+
+        ["<?php echo $nome ?>", <?php echo $alugados ?> ],
+
+        <?php } ?>
+      
+      ]);
+
+
+	  var options = {
+          title: 'Alugueis de todos os livros:'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
 
 
 
@@ -113,7 +149,7 @@ $livros_alugados = mysqli_fetch_assoc($resultado_alugados)['alugados'];
 echo '<br><br>O total de livros alugados é:  ', $livros_alugados, '<hr>';
 
 //QUANTIDADE LIVROS ATRASADOS
-@$query_atrasado = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'atrasado'";
+@$query_atrasado = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
 @$resultado_query_atrasado = mysqli_query($conn, $query_atrasado);
 @$livros_atrasados = mysqli_fetch_assoc($resultado_query_atrasado)['estado_aluguel'];
 
@@ -133,7 +169,7 @@ while ($dados = $busca->fetch_assoc()) {
 	echo "<tr>";
 }echo '<hr>';
 
-@$query_noprazo = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = ' '";
+@$query_noprazo = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'noPrazo'";
 @$resultado_query_noprazo = mysqli_query($conn, $query_noprazo);
 @$livros_dentroPrazo = mysqli_fetch_assoc($resultado_query_noprazo)['estado_aluguel'];
 
