@@ -39,7 +39,7 @@
 		
 			<br><label for="nomeLivro">Nome do livro:</label>
 
-					<select name="nomeLivro" class="form-select" aria-label="Default select example" disabled>
+					<select name="nomeLivro" class="form-select" aria-label="Default select example" >
 								<option value="<?php echo $nomeLivro;?>"><?php echo $nomeLivro;?></option>
 
 								<?php
@@ -66,7 +66,7 @@
 
 				<label for="nomeUsu">Seu nome:</label>
 
-				<select name="nomeUsu" class="form-select" aria-label="Default select example" disabled>
+				<select name="nomeUsu" class="form-select" aria-label="Default select example" >
 								<option value="<?php echo $nomeUsu;?>"><?php echo $nomeUsu;?></option>
 								<?php
 								include_once '../conexoes/conexao.php';
@@ -93,10 +93,10 @@
 
 
 				<label for="dAluguel">Data do Aluguel:</label>
-				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" disabled>
+				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" >
 				
 				<label for="prevDevolucao">Previsão de Devolução:</label>
-				<input type="text" name="prevDevolucao" class="form-control" value="<?php echo $prevDevolucao;?>" disabled>	
+				<input type="text" name="prevDevolucao" class="form-control" value="<?php echo $prevDevolucao;?>" >	
 				
 
     			<label for="dDevolucao">Data de Devolução:</label>

@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/Registro.css" media="only screen">
+	<link rel="stylesheet" href="../css/Registros.css" media="only screen">
 </head>
 <body> 
 

@@ -8,6 +8,6 @@ if ($nome == "WDAUsuario" && $senha == "1234") {
 
 }else {
     echo "<script>alert('Usuário e/ou senha incorreta, tente novamente');</script>";
-    header("Refresh: 1; url= ../index.html");
+    header("Refresh: 2; url= ../index.html");
 }
 ?>

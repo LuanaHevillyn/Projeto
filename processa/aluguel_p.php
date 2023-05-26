@@ -19,14 +19,13 @@ include_once '../conexoes/conexao.php';
 		@$sql_query = $conn->query($usuario_tabela);
 
 		@$dados_usuario = $sql_query->fetch_assoc();
-	
-
-		$dAluguel = isset($_POST['dAluguel']) == true ?$_POST['dAluguel']:"";
+			
 		$prevDevolucao = isset($_POST['prevDevolucao']) == true ?$_POST['prevDevolucao']:"";
+		$dAluguel = isset($_POST['dAluguel']) == true ?$_POST['dAluguel']:"";
 
 		if( @$livro_qtd > 0 ){
 
-			$sql =  "INSERT INTO aluguel (nomeLivro, nomeUsu, dAluguel, prevDevolucao) VALUES ('$nomeLivro', '$nomeUsu', '$dAluguel', '$prevDevolucao')";
+			$sql =  "INSERT INTO aluguel (nomeLivro, nomeUsu, dAluguel, prevDevolucao) VALUES ('$nomeLivro', '$nomeUsu', '$dAluguel',  '$prevDevolucao')";
 
 			$update_query = "update livro set disponiveis = estoque, disponiveis = estoque - 1, alugados = alugados + 1, estado = 'alugado' where id = '$nomeLivro' ";
 			mysqli_query($conn, $update_query);
