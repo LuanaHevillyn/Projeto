@@ -14,7 +14,9 @@ include_once '../conexoes/conexao.php';
 
 		if ($conn->query($sql) == TRUE) {
 
-			header('Location: ../mostrar/editora_m.php');
+			echo "<script>alert('Editora cadastrada!');</script>";
+			header("Refresh: 2; url= ../cadastros/editora.php");
+
 
 		} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;

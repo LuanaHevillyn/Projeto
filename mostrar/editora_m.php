@@ -53,7 +53,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="../pprincipal/dashboard.php">Dashboard</a>
+                    <a class="nav-link" href="../principal/dashboard.php">Dashboard</a>
                 </li>
                
             </ul>

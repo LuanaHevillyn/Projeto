@@ -89,7 +89,7 @@ select:focus{
 }
 
 input:focus{   
-    box-shadow: -8px 5px rgb(192, 160, 20) !important;
+    box-shadow: -8px 5px rgb(231, 193, 25) !important;
 }
 
 .input-group {

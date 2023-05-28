@@ -6,102 +6,228 @@
 <head>
 	<title>Painel Editora</title>
 	<meta charset="utf-8">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="./css/LoginEdi.css">
+	<link rel="stylesheet" href="../css/dash.css" media="only screen">
 </head>
-<body> 
-<header>
-    <img src="./imgs/Logo.png" style="height: 75%; width: 11%; margin-top: 1%; margin-left: 12%;" >
-    <a href="./locadora.html" style="margin-left: 34%;">Página Principal</a>
+<body style="background-color: #1b1b1b"> 
 
-</header>
+<nav class="navbar">
+    <div class="container-fluid">
+        <img src="../imgs/Logo.png" class="Logo">
 
+        <ul class="nav nav-underline">
+            <li class="nav-item">
+                <a class="nav-link active" media="only screen" style="color: white; font-family: 'Montserrat'; font-weight: 900;" aria-current="page" href="#">Dashboard</a>
+            </li>
+        </ul>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <script type="text/javascript">
-
-    google.charts.load("current", {packages:['corechart']});
-
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-      var data = google.visualization.arrayToDataTable([
-
-        ["Element", "Density", { role: "style" } ],
-
-        <?php
-        $sql = "SELECT * FROM usuarioaluga";
-        $busca = mysqli_query($conn, $sql);
-
-        while ($dados = mysqli_fetch_array($busca)) {
-          $nome = $dados['nome'];
-          $alugueis	= $dados['alugueis'];
-        
-        ?>
-
-        ["<?php echo $nome ?>", <?php echo $alugueis ?> ,"color: black"],
-
-        <?php } ?>
-      
-      ]);
-
-      var view = new google.visualization.DataView(data);
-
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-
-      var options = {
-        title: "O aluguel de cada usuário: ",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-  }
-  </script>
-<div id="columnchart_values" style="width: 900px; height: 300px;"></div><br><br><br>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+         
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="../cadastros/editora.php">Cadastro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../mostrar/editora_m.php">Relatórios</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+<div class="dados">
+      <div class="bloco1">
+        <center><h5>O total de livros alugados: </h5></center> 
+            <?php
+            $query_alugados = "SELECT SUM(alugados) AS alugados FROM livro";
+            $resultado_alugados = mysqli_query($conn, $query_alugados);
+            $livros_alugados = mysqli_fetch_assoc($resultado_alugados)['alugados'];
+            ?>   
+        <center><h4 style="color: rgb(231, 193, 25);"><?php echo $livros_alugados?></h4>
+      </div>
 
 
+      <div class="bloco2">
+        <center><h5>O total de livros atrasados: </h5>    
+            <?php
+            $sql = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
+            $busca = mysqli_query($conn, $sql);
+            $livros_atrasados = mysqli_fetch_assoc($busca)['estado_aluguel'];
+            ?>
+        <h4 style="color: rgb(231, 193, 25);"><?php echo $livros_atrasados?></center></h4>
+      </div>
 
+
+      <div class="bloco3">
+        <center><h5>O livro mais vendido: </h5>    
+            <?php
+            $sql = "SELECT nome AS popular FROM livro WHERE alugados = (SELECT MAX(alugados) FROM livro)";
+            $busca = mysqli_query($conn, $sql);
+            $livro_popular = mysqli_fetch_assoc($busca)['popular'];
+            ?>
+        <h4 style="color: rgb(231, 193, 25);"><?php echo $livro_popular?></h4></center>
+      </div>
+
+      <div class="bloco4">
+        <center><h5>A quant. de usuários: </h5>    
+            <?php
+            $sql = "SELECT COUNT(*) AS usu FROM usuarioaluga";
+            $busca = mysqli_query($conn, $sql);
+            $usuarios = mysqli_fetch_assoc($busca)['usu'];
+            ?>
+        <h4 style="color: rgb(231, 193, 25);"><?php echo $usuarios?></h4></center>
+      </div>
+</div>
+
+
+
+    <div class="row py-2">
+        <div class="col-md-4 py-1">
+            <div class="card"  style="box-shadow: black">
+                <div class="card-body">
+                  <div id="donutchart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                 <div id="piechart" ></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                 <div id="donut"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-20 py-1">
+            <div class="card">
+                <div class="card-body">
+                <div id="chart_div"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-			
+          ['Age', 'Weight'],
+          <?php
+            $sql = "SELECT * FROM usuarioaluga";
+            $busca = mysqli_query($conn, $sql);
+
+            while ($dados = mysqli_fetch_array($busca)) {
+              $nome = $dados['nome'];
+              $alugados	= $dados['alugueis'];
+            
+            ?>
+
+            ["<?php echo $nome ?>", <?php echo $alugados ?> ],
+
+            <?php } ?>
+        ]);
+
+        var options = {
+          title: 'Aluguéis de cada usuário',
+          hAxis: {title: 'Usuários', minValue: 0, maxValue: 15},
+          vAxis: {title: 'Aluguéis', minValue: 0, maxValue: 15},
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-		  
-		<?php
-        $sql = "SELECT * FROM livro";
-        $busca = mysqli_query($conn, $sql);
+            
+            <?php
+            $sql = "SELECT * FROM livro";
+            $busca = mysqli_query($conn, $sql);
 
-        while ($dados = mysqli_fetch_array($busca)) {
-          $nome = $dados['nome'];
-          $alugados	= $dados['alugados'];
-        
-        ?>
+            while ($dados = mysqli_fetch_array($busca)) {
+              $nome = $dados['nome'];
+              $alugados	= $dados['alugados'];
+            
+            ?>
 
-        ["<?php echo $nome ?>", <?php echo $alugados ?> ],
+            ["<?php echo $nome ?>", <?php echo $alugados ?> ],
 
-        <?php } ?>
-      
+            <?php } ?>
+      ]);
+	  var options = {
+          title: 'Alugueis de todos os livros:',
+          pieHole: 0.4,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          <?php
+            $sql = "SELECT * FROM editora";
+            $busca = mysqli_query($conn, $sql);
+
+            while ($dados = mysqli_fetch_array($busca)) {
+              $nome = $dados['nome'];
+              $alugados	= $dados['livros'];
+            
+            ?>
+
+            ["<?php echo $nome ?>", <?php echo $alugados ?> ],
+
+            <?php } ?>
       ]);
 
-
-	  var options = {
-          title: 'Alugueis de todos os livros:'
+        var options = {
+          title: 'Quantos livros cada editora cadastrou: '
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -110,99 +236,42 @@
       }
     </script>
 
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
 
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          <?php
+        include_once '../conexoes/conexao.php';
+        $sql = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
+        $busca = mysqli_query($conn, $sql);
+        @$livros_atrasados = mysqli_fetch_assoc($busca)['estado_aluguel'];
 
+        $mysql = "SELECT COUNT(*) AS estado_alug FROM aluguel WHERE estado = 'noPrazo'";
+        $buscar = mysqli_query($conn, $mysql);
+        $livros_prazo = mysqli_fetch_assoc($buscar)['estado_alug'];
 
+        ?>
 
+      ['<?php echo $livros_atrasados ?>', '<?php echo $livros_atrasados ?>'],
+      ['<?php echo $livros_prazo ?>', '<?php echo $livros_atrasados ?>'],
+      ]);
 
+        var options = {
+          title: 'Quantos livros cada editora cadastrou: '
+        };
 
+        var chart = new google.visualization.PieChart(document.getElementById('donut'));
 
+        chart.draw(data, options);
+      }
+    </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <?php
-include_once '../conexoes/conexao.php';
-
-///QUANTIDADE LIVROS ALUGADOS
-$query_alugados = "SELECT SUM(alugados) AS alugados FROM livro";
-$resultado_alugados = mysqli_query($conn, $query_alugados);
-$livros_alugados = mysqli_fetch_assoc($resultado_alugados)['alugados'];
-echo '<br><br>O total de livros alugados é:  ', $livros_alugados, '<hr>';
-
-//QUANTIDADE LIVROS ATRASADOS
-@$query_atrasado = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
-@$resultado_query_atrasado = mysqli_query($conn, $query_atrasado);
-@$livros_atrasados = mysqli_fetch_assoc($resultado_query_atrasado)['estado_aluguel'];
-
-echo '<br><br>O total de livros atrasados é : ',  $livros_atrasados, '<hr>';
-
-//CADA USÁRIO E SEU ALUGUEL
-echo '<br><br>Alugueis de acordo com usuários: <br>';
-$busca = $conn->query("SELECT * FROM usuarioaluga");
-while ($dados = $busca->fetch_assoc()) {
-
-
-	$nome   = $dados['nome'];
-	$alugueis	= $dados['alugueis'];
-
-	echo "<tr><br>";
-		echo "<td>$nome<td>      ||   $alugueis<br>";
-	echo "<tr>";
-}echo '<hr>';
-
-@$query_noprazo = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'noPrazo'";
-@$resultado_query_noprazo = mysqli_query($conn, $query_noprazo);
-@$livros_dentroPrazo = mysqli_fetch_assoc($resultado_query_noprazo)['estado_aluguel'];
-
-//LIVROS DEVOLVIDOS ANTES E DEPOIS DO PRAZO
-echo '<br>O total de livros devolvidos no prazo é:  ', $livros_dentroPrazo, ', e o de livros atrasados é: ', $livros_atrasados, '<hr>';
-
-
-//O ALUGUEL DE TODOS OS USUÁRIOS 
-$query_alugadosUsu = "SELECT SUM(alugueis) AS alugueis FROM usuarioaluga";
-$resultado_alugadosUsu = mysqli_query($conn, $query_alugadosUsu);
-$livros_alugadosUsu = mysqli_fetch_assoc($resultado_alugadosUsu)['alugueis'];
-echo '<br><br>O total de livros alugados pelos usuários é:  ', $livros_alugadosUsu, '<hr>';
-
-
-
-//LIVRO MAIS ALUGADO
-$query_alugados = "SELECT MAX(alugados) AS alugados
-FROM livro
-WHERE alugados > 0";
-$resultado_alugados = mysqli_query($conn, $query_alugados);
-$livros_alugados = mysqli_fetch_assoc($resultado_alugados)['alugados'];
-echo '<br><br>O livro mais alugado é:  ';
-
-$busca = $conn->query("SELECT nome, alugados FROM livro WHERE alugados = '$livros_alugados'");
-while ($dados = $busca->fetch_assoc()) {
-
-	$nome   = $dados['nome'];
-	$alugueis	= $dados['alugados'];
-
-	echo "<tr><br>";
-		echo "<td>$nome  <td>||  $alugueis<br>";
-	echo "<tr>";
-	}
-echo "<hr>";
-?>
+</script>
 </body>
+</html>

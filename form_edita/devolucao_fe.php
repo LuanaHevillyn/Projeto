@@ -39,66 +39,21 @@
 		
 			<br><label for="nomeLivro">Nome do livro:</label>
 
-					<select name="nomeLivro" class="form-select" aria-label="Default select example" >
-								<option value="<?php echo $nomeLivro;?>"><?php echo $nomeLivro;?></option>
+				<input type="text" name="nomeLivro" class="form-control" value="<?php echo $nomeLivro;?>" readonly>
 
-								<?php
-
-								include_once '../conexoes/conexao.php';
-
-								$sql_s = "SELECT * FROM livro";
-
-								$result = $conn -> query($sql_s);
-
-								while ($row_nome = $result->fetch_assoc()){ ?>
-
-								<option value="<?php echo $row_nome['id']; ?>">
 								
-								<?php echo $row_nome['id'] ?>
 
-								</option>
-
-								<?php
-								}
-								
-								?>
-							</select>
 
 				<label for="nomeUsu">Seu nome:</label>
 
-				<select name="nomeUsu" class="form-select" aria-label="Default select example" >
-								<option value="<?php echo $nomeUsu;?>"><?php echo $nomeUsu;?></option>
-								<?php
-								include_once '../conexoes/conexao.php';
-
-								$sql_s = "SELECT * FROM usuarioaluga";
-
-								$result = $conn -> query($sql_s);
-
-								while ($row_nome = $result->fetch_assoc()){ ?>
-
-								<option value="<?php echo $row_nome['id']; ?>">
-
-								<?php echo $row_nome['id'] ?>
-
-								</option>
-
-								<?php
-
-								}
-								
-								?>
-							  </select>							
+				<input type="text" name="nomeUsu" class="form-control" value="<?php echo $nomeUsu;?>" readonly>					
 							  
-
-
 				<label for="dAluguel">Data do Aluguel:</label>
-				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" >
+				<input type="text" name="dAluguel" class="form-control" value="<?php echo $dAluguel;?>" readonly>
 				
 				<label for="prevDevolucao">Previsão de Devolução:</label>
-				<input type="text" name="prevDevolucao" class="form-control" value="<?php echo $prevDevolucao;?>" >	
+				<input type="text" name="prevDevolucao" class="form-control" value="<?php echo $prevDevolucao;?>" readonly>	
 				
-
     			<label for="dDevolucao">Data de Devolução:</label>
 				<input type="text" name="dDevolucao" class="form-control" id="calendario">
 

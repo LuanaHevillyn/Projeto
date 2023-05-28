@@ -24,7 +24,11 @@ if (@$estoque == 0) {
 	$sql = "INSERT INTO livro (nome, autor, editora, dLancamento, estoque) VALUES ('$nome', '$autor', '$nomeEditora', '$dLancamento', '$estoque')";
 	mysqli_query($conn, $sql);
 
-	header("Refresh: 1; url= ../mostrar/livro_m.php");
+	$mysqli = "UPDATE editora set livros = livros + 1  WHERE id='$nomeEditora'";
+	mysqli_query($conn, $mysqli);
+
+	echo "<script>alert('Livro cadastrado!');</script>";
+	header("Refresh: 2; url= ../cadastros/livro.php");
 }
 
 

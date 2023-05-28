@@ -35,5 +35,4 @@
 
 		header("location: ../mostrar/livro_m.php");
 	}
-
 ?>

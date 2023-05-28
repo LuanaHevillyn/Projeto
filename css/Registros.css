@@ -1,0 +1,161 @@
+.navbar{
+    background-color: black;
+}
+  
+.Logo{
+    margin-left: 2%;
+    position: inherit;
+    width: 12%;
+    padding: 10px;
+}
+
+.offcanvas-body{
+    background-color: black;
+}
+
+.nav-link{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Montserrat';
+    font-weight: 700;
+}
+
+.nav-link:hover{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Montserrat';
+}
+
+.nav-link:focus{
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-toggler{
+    border: 2px solid #ffffff;
+    background-color: whitesmoke;
+}
+
+.offcanvas-title{
+    color: white;
+    font-size: 22px;
+    font-family: 'Montserrat';
+    font-style: bold;
+    font-weight: 900;
+}
+
+.offcanvas-header{
+    background-color: rgb(15, 15, 15);
+}
+
+.row{
+    background-color: black;
+    color: #ffffff;
+}
+
+.d-flex{
+    position: absolute;
+    top: 200px;
+    width: 25%;
+    left: 70%;
+}
+
+table{
+    margin-top: 150px;
+    width: 70%;
+    border: 1px solid black;
+}
+
+th{
+    border: 1px solid whitesmoke;
+    text-align: center;
+}
+
+thead{
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    font-family: 'Montserrat';
+    font-style: bold;
+    font-weight: 900;
+    border: 1px solid black;
+}
+
+tbody{
+    text-align: center;
+    border: 1px solid black;
+}
+
+
+
+@media only screen and (max-width: 600px){
+
+    .navbar{
+        background-color: black;
+    }
+      
+    .Logo{
+        position: inherit;
+        width: 30%;
+        margin-left: 35%;
+        padding: 20px;
+    }
+
+    .nav-link{
+        color: white;
+        font-size: 50px;
+        text-decoration: none;
+        font-family: 'Montserrat';
+        font-weight: 700;
+    }
+    
+    .nav-link:hover{
+        color: white;
+        font-size: 50px;
+        text-decoration: none;
+        font-family: 'Montserrat';
+    }
+    
+    .nav-underline{
+        margin-left: 10%;
+        margin-top: 6%;
+    }
+
+    .navbar-toggler{
+       width: 10%;
+    }
+
+    .offcanvas-title{
+        font-size: 50px;
+    }
+    
+    .offcanvas-header{
+        background-color: rgb(15, 15, 15);
+    }
+
+    .d-flex{
+        margin-top: 25%;
+        height: 5%;
+        width: 25%;
+    }
+
+    table{
+        margin-top: 22%;
+        width: 100%;
+        border: 1px solid black;
+        font-weight: bold;
+    }
+
+    thead{
+        font-size: 30px;
+        border: 1px solid black;
+    }
+
+    tbody{
+        font-size: 30px;
+        border: 1px solid black;
+    }
+  }

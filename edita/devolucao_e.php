@@ -41,11 +41,14 @@
 		$alterar = $conn->query("UPDATE usuarioaluga SET estado = 'semAluguel' WHERE id='$nomeUsu'");
 
 	}
-	if($prevDevolucao < $dDevolucao){
+
+	$daDevolucao = DateTime::createFromFormat ('d/m/Y',  $dDevolucao,);
+	$pDevolucao = DateTime::createFromFormat ('d/m/Y',  $prevDevolucao,);
+
+
+	if($pDevolucao < $daDevolucao){
 
 		$modificar = $conn->query("UPDATE aluguel SET estado = 'foraPrazo'  WHERE id='$id'");
-
-		
 
 	}else{
 

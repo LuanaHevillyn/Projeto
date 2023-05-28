@@ -35,7 +35,8 @@ include_once '../conexoes/conexao.php';
 
 		if ($conn->query($sql) == TRUE) {
 
-			header('Location: ../mostrar/usuario_m.php');
+			echo "<script>alert('Aluguel concluído!');</script>";
+			header("Refresh: 2; url= ../cadastros/aluguel.php");
 
 		} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
