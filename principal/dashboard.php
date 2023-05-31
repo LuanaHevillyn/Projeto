@@ -110,7 +110,7 @@
         <div class="col-md-4 py-1">
             <div class="card">
                 <div class="card-body">
-                 <div id="piechart" ></div>
+                 <div id="piechart"></div>
                 </div>
             </div>
         </div>
@@ -133,6 +133,8 @@
         </div>
     </div>
 
+
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -140,7 +142,7 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Age', 'Weight'],
+          ['Alugueis', 'Usuário'],
           <?php
             $sql = "SELECT * FROM usuarioaluga";
             $busca = mysqli_query($conn, $sql);
@@ -160,11 +162,15 @@
           title: 'Aluguéis de cada usuário',
           hAxis: {title: 'Usuários', minValue: 0, maxValue: 15},
           vAxis: {title: 'Aluguéis', minValue: 0, maxValue: 15},
-          legend: 'none'
+          animation: { 
+            startup: true, 
+            duration: 1000, 
+            easing: 'inAndOut',
+          }
+
         };
 
         var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-
         chart.draw(data, options);
       }
     </script>
@@ -194,23 +200,24 @@
       ]);
 	  var options = {
           title: 'Alugueis de todos os livros:',
-          pieHole: 0.4,
+
         };
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
+
       }
     </script>
 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+      <div id="piechart" style="width: 900px; height: 500px;"></div> 
+      <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
-
       function drawChart() {
-
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
+
+          ['Nome', 'Hours per Day'],
           <?php
             $sql = "SELECT * FROM editora";
             $busca = mysqli_query($conn, $sql);
@@ -227,50 +234,53 @@
       ]);
 
         var options = {
-          title: 'Quantos livros cada editora cadastrou: '
+          title: 'Livros cadastrados por editora: ',
+
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
         chart.draw(data, options);
       }
+
+      </script>  
     </script>
 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+      <script type="text/javascript">
 
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
+          ['Estado', 'Estado'],
           <?php
-        include_once '../conexoes/conexao.php';
-        $sql = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
-        $busca = mysqli_query($conn, $sql);
-        @$livros_atrasados = mysqli_fetch_assoc($busca)['estado_aluguel'];
+          include_once '../conexoes/conexao.php';
+          $sql = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
+          $busca = mysqli_query($conn, $sql);
+          @$livros_atrasados = mysqli_fetch_assoc($busca)['estado_aluguel'];
 
-        $mysql = "SELECT COUNT(*) AS estado_alug FROM aluguel WHERE estado = 'noPrazo'";
-        $buscar = mysqli_query($conn, $mysql);
-        $livros_prazo = mysqli_fetch_assoc($buscar)['estado_alug'];
+          $mysql = "SELECT COUNT(*) AS estado_alug FROM aluguel WHERE estado = 'noPrazo'";
+          $buscar = mysqli_query($conn, $mysql);
+          $livros_prazo = mysqli_fetch_assoc($buscar)['estado_alug'];
 
         ?>
-
-      ['<?php echo $livros_atrasados ?>', '<?php echo $livros_atrasados ?>'],
-      ['<?php echo $livros_prazo ?>', '<?php echo $livros_atrasados ?>'],
-      ]);
+        ['Fora Prazo:', <?php echo $livros_atrasados ?>],
+        ['No Prazo:', <?php echo $livros_prazo ?>],
+         
+        ]);
 
         var options = {
-          title: 'Quantos livros cada editora cadastrou: '
+          title: 'Estado dos livros entregues: ',
+          legend: 'Estado dos livros entregues:',
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('donut'));
-
+        var chart = new google.visualization.Histogram(document.getElementById('donut'));
         chart.draw(data, options);
       }
     </script>
+  </script>
 
 </script>
 </body>
