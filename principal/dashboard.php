@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/dash.css" media="only screen">
+	<link rel="stylesheet" href="../css/dashboard.css" media="only screen">
 </head>
 <body style="background-color: #1b1b1b"> 
 
@@ -101,7 +101,8 @@
 
     <div class="row py-2">
         <div class="col-md-4 py-1">
-            <div class="card"  style="box-shadow: black">
+            <div class="card">
+            <div class="card-header">Alugueis de todos os livros: </div>
                 <div class="card-body">
                   <div id="donutchart"></div>
                 </div>
@@ -109,6 +110,7 @@
         </div>
         <div class="col-md-4 py-1">
             <div class="card">
+            <div class="card-header">Livros cadastrados por editora: </div>
                 <div class="card-body">
                  <div id="piechart"></div>
                 </div>
@@ -116,6 +118,7 @@
         </div>
         <div class="col-md-4 py-1">
             <div class="card">
+            <div class="card-header">Estado dos livros entregues: </div>
                 <div class="card-body">
                  <div id="donut"></div>
                 </div>
@@ -126,6 +129,7 @@
     <div class="row my-2">
         <div class="col-md-20 py-1">
             <div class="card">
+            <div class="card-header">Aluguéis de cada usuário: </div>
                 <div class="card-body">
                 <div id="chart_div"></div>
                 </div>
@@ -159,9 +163,11 @@
         ]);
 
         var options = {
-          title: 'Aluguéis de cada usuário',
+          colors: ['black'],
+
           hAxis: {title: 'Usuários', minValue: 0, maxValue: 15},
           vAxis: {title: 'Aluguéis', minValue: 0, maxValue: 15},
+          
           animation: { 
             startup: true, 
             duration: 1000, 
@@ -199,8 +205,8 @@
             <?php } ?>
       ]);
 	  var options = {
-          title: 'Alugueis de todos os livros:',
-
+      
+      colors: ['#000000', '#222222', '#444444', '#666666', '#888888']
         };
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
@@ -234,7 +240,7 @@
       ]);
 
         var options = {
-          title: 'Livros cadastrados por editora: ',
+          colors: ['#000000', '#222222', '#444444', '#666666', '#888888']
 
         };
 
@@ -272,7 +278,7 @@
         ]);
 
         var options = {
-          title: 'Estado dos livros entregues: ',
+          colors: ['black'],
           legend: 'Estado dos livros entregues:',
         };
 
