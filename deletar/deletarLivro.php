@@ -9,7 +9,7 @@
 	$livros_estoque = $row['estado'];
 
 
-	if ("$livros_estoque" == 'disponivel') {
+	if ($livros_estoque == 'disponivel') {
 
 		$deletar = $conn->query("DELETE FROM livro WHERE id='$id'");
 		

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 	<style>html, body {height: 100%; margin: 0; padding: 0;}</style>
-	<link rel="stylesheet" href="../css/dashboard.css" media="only screen">
+  <link rel="stylesheet" href="../css/dash.css" media="only screen">
 </head>
 <body style="background-color: #1b1b1b"> 
 
@@ -52,7 +52,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container-fluid">
 <div class="dados">
       <div class="bloco1">
         <center><h5>O total de livros alugados: </h5></center> 
@@ -101,26 +101,26 @@
 
     <div class="row py-2">
         <div class="col-md-4 py-1">
-            <div class="card">
+            <div class="card border-warning">
             <div class="card-header">Alugueis de todos os livros: </div>
                 <div class="card-body">
-                  <div id="donutchart"></div>
+                  <div id="donutchart" class="chart"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-4 py-1">
-            <div class="card">
+            <div class="card border-warning">
             <div class="card-header">Livros cadastrados por editora: </div>
                 <div class="card-body">
-                 <div id="piechart"></div>
+                 <div id="piechart" class="chart"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-4 py-1">
-            <div class="card">
-            <div class="card-header">Estado dos livros entregues: </div>
+            <div class="card border-warning">
+              <div class="card-header">Estado dos livros entregues: </div>
                 <div class="card-body">
-                 <div id="donut"></div>
+                 <div id="coluna" class="chart"></div>
                 </div>
             </div>
         </div>
@@ -128,10 +128,10 @@
 
     <div class="row my-2">
         <div class="col-md-20 py-1">
-            <div class="card">
-            <div class="card-header">Aluguéis de cada usuário: </div>
+            <div class="card border-warning">
+              <div class="card-header">Aluguéis de cada usuário: </div>
                 <div class="card-body">
-                <div id="chart_div"></div>
+                  <div id="chart_div" class="chart"></div>
                 </div>
             </div>
         </div>
@@ -178,6 +178,7 @@
 
         var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+        window.addEventListener('resize', drawChart, false);
       }
     </script>
 
@@ -188,7 +189,7 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
+          ['Nome', 'Alugados'],
             
             <?php
             $sql = "SELECT * FROM livro";
@@ -210,7 +211,7 @@
         };
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
-
+        window.addEventListener('resize', drawChart, false);
       }
     </script>
 
@@ -223,7 +224,7 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
 
-          ['Nome', 'Hours per Day'],
+          ['Nome', 'Livros'],
           <?php
             $sql = "SELECT * FROM editora";
             $busca = mysqli_query($conn, $sql);
@@ -246,10 +247,10 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
+        window.addEventListener('resize', drawChart, false);
       }
 
       </script>  
-    </script>
 
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
@@ -260,7 +261,7 @@
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Estado', 'Estado'],
+          ['Aluguéis', 'Aluguéis'],
           <?php
           include_once '../conexoes/conexao.php';
           $sql = "SELECT COUNT(*) AS estado_aluguel FROM aluguel WHERE estado = 'foraPrazo'";
@@ -272,8 +273,8 @@
           $livros_prazo = mysqli_fetch_assoc($buscar)['estado_alug'];
 
         ?>
-        ['Fora Prazo:', <?php echo $livros_atrasados ?>],
-        ['No Prazo:', <?php echo $livros_prazo ?>],
+        ['Fora do Prazo:', <?php echo $livros_atrasados ?>],
+        ['Dentro do Prazo:', <?php echo $livros_prazo ?>],
          
         ]);
 
@@ -282,12 +283,12 @@
           legend: 'Estado dos livros entregues:',
         };
 
-        var chart = new google.visualization.Histogram(document.getElementById('donut'));
+        var chart = new google.visualization.Histogram(document.getElementById('coluna'));
         chart.draw(data, options);
+        window.addEventListener('resize', drawChart, false);
       }
-    </script>
-  </script>
 
 </script>
+</div>
 </body>
 </html>
